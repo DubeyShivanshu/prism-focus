@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "Prism",
+  "short_name": "Prism",
+  "version": "1.0.0",
+  "description": "AI-powered cognitive friction that makes distraction unrewarding.",
+
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "<all_urls>"
+  ],
+
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["content/content.js"],
+      "css": ["styles/distortion.css"],
+      "run_at": "document_start",
+      "exclude_matches": [
+        "http://localhost:5000/*",
+        "http://localhost:5173/*",
+        "https://accounts.google.com/*",
+        "https://*.google.com/o/oauth2/*",
+        "https://oauth2.googleapis.com/*",
+        "https://www.gstatic.com/*",
+        "https://github.com/login/*"
+      ]
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_title": "Prism"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["styles/*", "assets/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
+

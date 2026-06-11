@@ -1,0 +1,15 @@
+/*
+  Prism Distortion Stylesheet
+  Injected by content.js alongside friction logic.
+  These are base styles; content.js injects level-specific overrides inline.
+*/
+
+/* Smooth apply so it's not jarring on page load */
+html[data-prism-friction] {
+  transition: filter 0.8s ease !important;
+}
+
+/* Level-specific body padding for overlay */
+body[data-prism-level="3"] {
+  overflow: hidden !important;
+}

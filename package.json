@@ -1,0 +1,19 @@
+{
+  "name": "prism",
+  "version": "1.0.0",
+  "description": "AI-Powered Cognitive Friction Productivity Platform",
+  "private": true,
+  "scripts": {
+    "dev:backend":  "cd backend  && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "install:all":  "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm":  ">=10.0.0"
+  }
+}
+
