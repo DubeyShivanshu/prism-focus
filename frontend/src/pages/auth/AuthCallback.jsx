@@ -38,7 +38,8 @@ export default function AuthCallback() {
     // Fetch user profile directly using the access token
     // Do NOT call init() — it triggers POST /api/auth/refresh which causes
     // "token reuse detected" when StrictMode fires the effect twice.
-    fetch('http://localhost:5000/api/auth/me', {
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+    fetch(`${API_URL}/auth/me`, {
       headers: { Authorization: `Bearer ${token}` },
       credentials: 'include',
     })
