@@ -5,14 +5,14 @@ import SessionTypeChart from '../../components/Charts/SessionTypeChart'
 import FullHeatmap      from '../../components/Charts/FullHeatmap'
 import api from '../../services/api'
 
-// ─── Period tabs ──────────────────────────────────────────────────────────────
+// Period tabs
 const PERIODS = [
   { label: '7 days',  days: 7  },
   { label: '30 days', days: 30 },
   { label: '90 days', days: 90 },
 ]
 
-// ─── Summary stat card ────────────────────────────────────────────────────────
+// Summary stat card
 function SummaryCard({ icon, label, value, unit = '', accent, sub }) {
   return (
     <div style={{ ...cardStyle, borderTop: `2px solid ${accent}` }}>
@@ -36,7 +36,7 @@ const cardStyle = {
   padding: '16px 18px',
 }
 
-// ─── Analytics Page ───────────────────────────────────────────────────────────
+// Analytics Page
 export default function Analytics() {
   const [period,    setPeriod]    = useState(30)
   const [loading,   setLoading]   = useState(true)

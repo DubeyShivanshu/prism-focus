@@ -7,7 +7,7 @@ import { useSessionStore } from '../../store/sessionStore'
 import { useAuthStore }    from '../../store/authStore'
 import api from '../../services/api'
 
-// ─── Top Distraction card ─────────────────────────────────────────────────────
+// Top Distraction card
 function TopDistractionCard({ site }) {
   if (!site) return (
     <div style={cardStyle}>
@@ -40,7 +40,7 @@ function TopDistractionCard({ site }) {
   )
 }
 
-// ─── Streak Card ──────────────────────────────────────────────────────────────
+// Streak Card
 function StreakCard({ streak }) {
   const cur  = streak?.current || 0
   const best = streak?.best || 0
@@ -77,7 +77,7 @@ function StreakCard({ streak }) {
   )
 }
 
-// ─── Dashboard ─────────────────────────────────────────────────────────────────
+// Dashboard
 export default function Dashboard() {
   const { user }        = useAuthStore()
   const { fetchActive } = useSessionStore()
@@ -209,7 +209,7 @@ export default function Dashboard() {
   )
 }
 
-// ─── Shared mini styles ────────────────────────────────────────────────────────
+// Shared mini styles
 const cardStyle = {
   background: 'var(--bg-card)',
   border: '1px solid var(--border)',
@@ -234,7 +234,7 @@ const pill = {
   fontWeight: 600,
 }
 
-// ─── Layout styles ─────────────────────────────────────────────────────────────
+// Layout styles
 const styles = {
   page: {
     display: 'flex',

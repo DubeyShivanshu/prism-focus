@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import api from '../../services/api'
 import { useAuthStore } from '../../store/authStore'
 
-// ─── Section wrapper ──────────────────────────────────────────────────────────
+// Section wrapper
 function Section({ title, subtitle, children }) {
   return (
     <div style={styles.section}>
@@ -16,7 +16,7 @@ function Section({ title, subtitle, children }) {
   )
 }
 
-// ─── Field row ────────────────────────────────────────────────────────────────
+// Field row
 function Field({ label, hint, children }) {
   return (
     <div style={styles.field}>
@@ -29,7 +29,7 @@ function Field({ label, hint, children }) {
   )
 }
 
-// ─── Toggle ───────────────────────────────────────────────────────────────────
+// Toggle
 function Toggle({ checked, onChange }) {
   return (
     <div onClick={onChange} style={{
@@ -48,7 +48,7 @@ function Toggle({ checked, onChange }) {
   )
 }
 
-// ─── Save button with inline status ──────────────────────────────────────────
+// Save button with inline status
 function SaveBtn({ onClick, loading, saved, label = 'Save Changes' }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 20 }}>
@@ -60,7 +60,7 @@ function SaveBtn({ onClick, loading, saved, label = 'Save Changes' }) {
   )
 }
 
-// ─── Number stepper ──────────────────────────────────────────────────────────
+// Number stepper
 function Stepper({ value, onChange, min, max, unit }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -78,35 +78,35 @@ function Stepper({ value, onChange, min, max, unit }) {
   )
 }
 
-// ─── Main Settings Page ───────────────────────────────────────────────────────
+// Main Settings Page
 export default function Settings() {
   const { user, logout } = useAuthStore()
   const navigate = useNavigate()
 
-  // ── Profile state ───────────────────────────────────────────
+  // Profile state
   const [name,         setName]         = useState(user?.name || '')
   const [avatar,       setAvatar]       = useState(user?.avatar || '')
   const [profileSaving, setProfileSaving] = useState(false)
   const [profileSaved,  setProfileSaved]  = useState(false)
 
-  // ── Timer settings ──────────────────────────────────────────
+  // Timer settings
   const [pomWork,    setPomWork]    = useState(25)
   const [pomBreak,   setPomBreak]   = useState(5)
   const [timerSaving, setTimerSaving] = useState(false)
   const [timerSaved,  setTimerSaved]  = useState(false)
 
-  // ── Goals ───────────────────────────────────────────────────
+  // Goals
   const [dailyGoal,  setDailyGoal]  = useState(4)
   const [goalSaving, setGoalSaving] = useState(false)
   const [goalSaved,  setGoalSaved]  = useState(false)
 
-  // ── Preferences ─────────────────────────────────────────────
+  // Preferences
   const [notifications, setNotifications] = useState(true)
   const [frictionMode,  setFrictionMode]  = useState('auto')
   const [prefSaving,    setPrefSaving]    = useState(false)
   const [prefSaved,     setPrefSaved]     = useState(false)
 
-  // ── Load settings on mount ──────────────────────────────────
+  // Load settings on mount
   useEffect(() => {
     api.get('/settings').then(({ data }) => {
       const s = data.data?.settings || {}
@@ -118,13 +118,13 @@ export default function Settings() {
     }).catch(() => {})
   }, [])
 
-  // ── Save helper ─────────────────────────────────────────────
+  // Save helper
   const flash = (setSaved) => {
     setSaved(true)
     setTimeout(() => setSaved(false), 2500)
   }
 
-  // ── Save profile ────────────────────────────────────────────
+  // Save profile
   const saveProfile = async () => {
     setProfileSaving(true)
     try {
@@ -133,7 +133,7 @@ export default function Settings() {
     } finally { setProfileSaving(false) }
   }
 
-  // ── Save timer settings ─────────────────────────────────────
+  // Save timer settings
   const saveTimer = async () => {
     setTimerSaving(true)
     try {
@@ -142,7 +142,7 @@ export default function Settings() {
     } finally { setTimerSaving(false) }
   }
 
-  // ── Save goals ──────────────────────────────────────────────
+  // Save goals
   const saveGoal = async () => {
     setGoalSaving(true)
     try {
@@ -151,7 +151,7 @@ export default function Settings() {
     } finally { setGoalSaving(false) }
   }
 
-  // ── Save preferences ────────────────────────────────────────
+  // Save preferences
   const savePreferences = async () => {
     setPrefSaving(true)
     try {
@@ -160,7 +160,7 @@ export default function Settings() {
     } finally { setPrefSaving(false) }
   }
 
-  // ── Logout ──────────────────────────────────────────────────
+  // Logout
   const handleLogout = async () => {
     await logout()
     navigate('/login')
@@ -312,7 +312,7 @@ export default function Settings() {
   )
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
+// Styles
 const styles = {
   page:    { display: 'flex', flexDirection: 'column', gap: 0, maxWidth: 720 },
   header:  { marginBottom: 24 },

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
 
-// ─── Prism Logo ────────────────────────────────────────────────────────────────
+// Prism Logo
 const PrismLogo = ({ size = 40 }) => (
   <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-label="Prism logo">
     <polygon points="24,3 45,42 3,42" fill="url(#rg)" />
@@ -16,7 +16,7 @@ const PrismLogo = ({ size = 40 }) => (
   </svg>
 )
 
-// ─── Password Strength ────────────────────────────────────────────────────────
+// Password Strength
 const getStrength = (pw) => {
   let score = 0
   if (pw.length >= 8)           score++
@@ -49,7 +49,7 @@ const PasswordStrength = ({ password }) => {
   )
 }
 
-// ─── Step indicators ──────────────────────────────────────────────────────────
+// Step indicators
 const steps = ['Account', 'Password', 'Done']
 const StepDots = ({ current }) => (
   <div style={{ display:'flex', gap:6, marginBottom:32, justifyContent:'center' }}>
@@ -65,7 +65,7 @@ const StepDots = ({ current }) => (
   </div>
 )
 
-// ─── Register Page ────────────────────────────────────────────────────────────
+// Register Page
 export default function Register() {
   const navigate    = useNavigate()
   const { register } = useAuth()
@@ -331,7 +331,7 @@ export default function Register() {
   )
 }
 
-// ─── Styles ────────────────────────────────────────────────────────────────────
+// Styles
 const styles = {
   page: {
     minHeight: '100vh',

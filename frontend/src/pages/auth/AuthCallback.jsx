@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuthStore } from '../../store/authStore'
 
-// ─── OAuth Callback Handler ───────────────────────────────────────────────────
+// OAuth Callback Handler
 // The backend redirects here after Google OAuth:
 //   /auth/callback?token=<accessToken>   ← success
 //   /auth/callback?error=<reason>        ← failure

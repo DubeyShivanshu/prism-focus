@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import api from '../../services/api'
 import { useAuthStore } from '../../store/authStore'
 
-// ─── Stat card for the shareable panel ───────────────────────────────────────
+// Stat card for the shareable panel
 function StatCard({ icon, label, value, color = 'var(--indigo)', sub }) {
   return (
     <div style={{
@@ -18,7 +18,7 @@ function StatCard({ icon, label, value, color = 'var(--indigo)', sub }) {
   )
 }
 
-// ─── Leaderboard row ─────────────────────────────────────────────────────────
+// Leaderboard row
 function LeaderRow({ rank, name, score, isYou }) {
   const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`
   return (
@@ -50,7 +50,7 @@ function LeaderRow({ rank, name, score, isYou }) {
   )
 }
 
-// ─── Share card ───────────────────────────────────────────────────────────────
+// Share card
 function ShareCard({ stats, user }) {
   const [copied, setCopied] = useState(false)
 
@@ -112,7 +112,7 @@ function ShareCard({ stats, user }) {
   )
 }
 
-// ─── Main Social Page ─────────────────────────────────────────────────────────
+// Main Social Page
 export default function Social() {
   const { user } = useAuthStore()
   const [loading, setLoading] = useState(true)

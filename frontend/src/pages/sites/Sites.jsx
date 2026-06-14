@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import api from '../../services/api'
 import AddSiteModal from '../../components/UI/AddSiteModal'
 
-// ─── Constants ────────────────────────────────────────────────────────────────
+// Constants
 const CATEGORIES = ['all', 'social', 'entertainment', 'news', 'gaming', 'shopping', 'other']
 
 const CATEGORY_COLORS = {
@@ -17,7 +17,7 @@ const CATEGORY_COLORS = {
 const FRICTION_LABELS = ['Off', 'Mild', 'Moderate', 'Severe']
 const FRICTION_COLORS = ['var(--text-4)', 'var(--amber)', 'var(--orange)', 'var(--rose)']
 
-// ─── Friction bar ─────────────────────────────────────────────────────────────
+// Friction bar
 function FrictionBar({ level }) {
   const color = FRICTION_COLORS[level] || 'var(--text-4)'
   return (
@@ -38,7 +38,7 @@ function FrictionBar({ level }) {
   )
 }
 
-// ─── Toggle switch ─────────────────────────────────────────────────────────────
+// Toggle switch
 function Toggle({ checked, onChange }) {
   return (
     <div
@@ -62,7 +62,7 @@ function Toggle({ checked, onChange }) {
   )
 }
 
-// ─── Site Card ─────────────────────────────────────────────────────────────────
+// Site Card
 function SiteCard({ site, onToggle, onDelete, onFrictionChange }) {
   const [deleting, setDeleting] = useState(false)
   const catColor = CATEGORY_COLORS[site.category] || CATEGORY_COLORS.other
@@ -175,7 +175,7 @@ const cardStyle = {
   transition: 'opacity 0.2s',
 }
 
-// ─── Main Sites Page ───────────────────────────────────────────────────────────
+// Main Sites Page
 export default function Sites() {
   const [sites,      setSites]      = useState([])
   const [loading,    setLoading]    = useState(true)
@@ -183,7 +183,7 @@ export default function Sites() {
   const [showModal,  setShowModal]  = useState(false)
   const [search,     setSearch]     = useState('')
 
-  // ── Load sites ──────────────────────────────────────────────
+  // Load sites
   const load = useCallback(async () => {
     try {
       const { data } = await api.get('/blocks')
@@ -197,38 +197,38 @@ export default function Sites() {
 
   useEffect(() => { load() }, [load])
 
-  // ── Add site ────────────────────────────────────────────────
+  // Add site
   const handleAdd = async (payload) => {
     const { data } = await api.post('/blocks', payload)
     setSites(s => [data.data.site, ...s])
   }
 
-  // ── Toggle enable/disable ───────────────────────────────────
+  // Toggle enable/disable
   const handleToggle = async (id) => {
     const { data } = await api.patch(`/blocks/${id}/toggle`)
     setSites(s => s.map(site => site._id === id ? data.data.site : site))
   }
 
-  // ── Delete ──────────────────────────────────────────────────
+  // Delete
   const handleDelete = async (id) => {
     await api.delete(`/blocks/${id}`)
     setSites(s => s.filter(site => site._id !== id))
   }
 
-  // ── Change friction level inline ────────────────────────────
+  //  Change friction level inline
   const handleFriction = async (id, frictionLevel) => {
     const { data } = await api.patch(`/blocks/${id}`, { frictionLevel })
     setSites(s => s.map(site => site._id === id ? data.data.site : site))
   }
 
-  // ── Filtered + searched sites ───────────────────────────────
+  // Filtered + searched sites
   const filtered = sites.filter(s => {
     const matchCat    = filter === 'all' || s.category === filter
     const matchSearch = !search || s.domain.includes(search.toLowerCase()) || (s.name || '').toLowerCase().includes(search.toLowerCase())
     return matchCat && matchSearch
   })
 
-  // ── Summary stats ───────────────────────────────────────────
+  // Summary stats
   const totalActive   = sites.filter(s => s.isEnabled).length
   const totalOverrides = sites.reduce((sum, s) => sum + (s.stats?.overrideCount || 0), 0)
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
 
-// ─── Prism Logo ────────────────────────────────────────────────────────────────
+// Prism Logo
 const PrismLogo = ({ size = 48 }) => (
   <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-label="Prism logo">
     <polygon points="24,3 45,42 3,42" fill="url(#lg)" />
@@ -18,7 +18,7 @@ const PrismLogo = ({ size = 48 }) => (
   </svg>
 )
 
-// ─── Feature item ──────────────────────────────────────────────────────────────
+// Feature item
 const Feature = ({ icon, title, description }) => (
   <div style={{ display:'flex', gap:'12px', alignItems:'flex-start' }}>
     <div style={{
@@ -35,7 +35,7 @@ const Feature = ({ icon, title, description }) => (
   </div>
 )
 
-// ─── Login Page ────────────────────────────────────────────────────────────────
+// Login Page
 export default function Login() {
   const navigate  = useNavigate()
   const { login } = useAuth()
@@ -121,7 +121,7 @@ export default function Login() {
         </div>
       </div>
 
-      {/* ── Right Form Panel ── */}
+      {/* Right Form Panel */}
       <div style={styles.formPanel}>
         <div style={styles.formCard} className="animate-fade-in-up">
           {/* Mobile logo */}
@@ -226,7 +226,7 @@ export default function Login() {
   )
 }
 
-// ─── Styles ────────────────────────────────────────────────────────────────────
+// Styles
 const styles = {
   page: {
     minHeight: '100vh',

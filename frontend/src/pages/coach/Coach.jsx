@@ -3,7 +3,7 @@ import { useCoachStore } from '../../store/coachStore'
 import { useAuthStore }  from '../../store/authStore'
 import ChatBubble from '../../components/UI/ChatBubble'
 
-// ─── Typing indicator ─────────────────────────────────────────────────────────
+// Typing indicator
 function TypingIndicator() {
   return (
     <div style={{ display:'flex', gap:10, marginBottom:14, alignItems:'flex-start' }}>
@@ -38,7 +38,7 @@ const dot = {
   animation:'typingBounce 0.9s ease-in-out infinite',
 }
 
-// ─── Context sidebar panel ─────────────────────────────────────────────────────
+// Context sidebar panel
 function ContextPanel({ user }) {
   const streak = user?.streak?.current || 0
   const score  = user?.productivityScore || 0
@@ -102,7 +102,7 @@ function ContextPanel({ user }) {
   )
 }
 
-// ─── Main Coach Page ───────────────────────────────────────────────────────────
+// Main Coach Page
 export default function Coach() {
   const { user }                                  = useAuthStore()
   const { messages, suggestions, isTyping,
@@ -224,7 +224,7 @@ export default function Coach() {
   )
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
+// Styles
 const styles = {
   page: { height: 'calc(100vh - 120px)', display: 'flex', flexDirection: 'column' },
   layout: {

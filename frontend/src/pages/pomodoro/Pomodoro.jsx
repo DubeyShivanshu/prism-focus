@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTimerStore } from '../../store/timerStore'
 import { format } from 'date-fns'
 
-// ─── Constants ────────────────────────────────────────────────────────────────
+// Constants
 const SESSION_TYPES = [
   { key: 'pomodoro',  label: 'Pomodoro',  icon: '⬡', minutes: 25, color: '#4F46E5' },
   { key: 'deep_work', label: 'Deep Work', icon: '◈', minutes: 90, color: '#7C3AED' },
@@ -17,7 +17,7 @@ const PHASE_LABELS = {
   completed: 'Session complete! 🎉',
 }
 
-// ─── SVG Circular timer ───────────────────────────────────────────────────────
+// SVG Circular timer
 function CircleTimer({ timeLeft, totalSeconds, phase, color = '#4F46E5' }) {
   const R   = 110
   const C   = 2 * Math.PI * R
@@ -64,7 +64,7 @@ function CircleTimer({ timeLeft, totalSeconds, phase, color = '#4F46E5' }) {
   )
 }
 
-// ─── Session history item ─────────────────────────────────────────────────────
+// Session history item
 function HistoryItem({ session }) {
   const mins  = session.actualDuration || session.plannedDuration
   const label = SESSION_TYPES.find(t => t.key === session.type)?.label || session.type
@@ -87,7 +87,7 @@ function HistoryItem({ session }) {
   )
 }
 
-// ─── Main Pomodoro Page ───────────────────────────────────────────────────────
+// Main Pomodoro Page
 export default function Pomodoro() {
   const {
     sessionType, phase, timeLeft, totalSeconds, todaySessions,
@@ -103,7 +103,7 @@ export default function Pomodoro() {
   const activeType = SESSION_TYPES.find(t => t.key === sessionType) || SESSION_TYPES[0]
   const color      = phase === 'break' ? '#10B981' : activeType.color
 
-  // ── Tick interval ──────────────────────────────────────────
+  // Tick interval
   useEffect(() => {
     if (phase === 'running' || phase === 'break') {
       intervalRef.current = setInterval(() => tick(), 1000)
@@ -113,10 +113,10 @@ export default function Pomodoro() {
     return () => clearInterval(intervalRef.current)
   }, [phase, tick])
 
-  // ── Load today history on mount ────────────────────────────
+  // Load today history on mount
   useEffect(() => { loadToday() }, [loadToday])
 
-  // ── Today stats ────────────────────────────────────────────
+  // Today stats
   const todayMins = todaySessions.reduce((s, sess) => s + (sess.actualDuration || sess.plannedDuration || 0), 0)
 
   const handleComplete = async () => {
@@ -303,7 +303,7 @@ export default function Pomodoro() {
   )
 }
 
-// ─── Styles ───────────────────────────────────────────────────────────────────
+// Styles
 const styles = {
   page:   { display: 'flex', flexDirection: 'column', height: 'calc(100vh - 120px)' },
   layout: { display: 'grid', gridTemplateColumns: '1fr 320px', gap: 20, flex: 1, minHeight: 0 },

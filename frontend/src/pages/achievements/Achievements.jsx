@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import api from '../../services/api'
 import { useAuthStore } from '../../store/authStore'
 
-// ─── Achievement definitions ──────────────────────────────────────────────────
+// Achievement definitions
 const ACHIEVEMENTS = [
   // Sessions
   { id: 'first_session',  category: 'sessions', icon: '🚀', title: 'First Step',        desc: 'Complete your first focus session',      color: '#4F46E5', threshold: 1,    getValue: d => d.sessions },
@@ -33,7 +33,7 @@ const CATEGORIES = [
   { key: 'focus',    label: 'Focus' },
 ]
 
-// ─── Achievement card ─────────────────────────────────────────────────────────
+// Achievement card
 function AchievementCard({ achievement, userdata }) {
   const raw      = achievement.getValue(userdata)
   const unlocked = raw >= achievement.threshold
@@ -105,7 +105,7 @@ const cardStyle = {
   transition: 'border-color 0.2s, background 0.2s',
 }
 
-// ─── Main Achievements Page ───────────────────────────────────────────────────
+// Main Achievements Page
 export default function Achievements() {
   const { user } = useAuthStore()
   const [filter,   setFilter]   = useState('all')
