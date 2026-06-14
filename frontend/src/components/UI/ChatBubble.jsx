@@ -38,7 +38,7 @@ export default function ChatBubble({ message }) {
   if (isError) {
     return (
       <div style={{ display:'flex', gap:10, marginBottom:14, alignItems:'flex-start' }}>
-        <div style={styles.ariaDot}>!</div>
+        <div style={styles.saathiDot}>!</div>
         <div style={{ maxWidth:'80%' }}>
           <div style={styles.errorBubble}>{message.content}</div>
         </div>
@@ -46,15 +46,15 @@ export default function ChatBubble({ message }) {
     )
   }
 
-  // Aria message
+  // Saathi message
   return (
     <div style={{ display:'flex', gap:10, marginBottom:14, alignItems:'flex-start' }}>
       {/* Avatar */}
-      <div style={styles.ariaAvatar}>A</div>
+      <div style={styles.saathiAvatar}>S</div>
 
       <div style={{ maxWidth:'80%' }}>
-        <div style={styles.ariaLabel}>Aria · AI Coach</div>
-        <div style={styles.ariaBubble}>
+        <div style={styles.saathiLabel}>Saathi · AI Coach</div>
+        <div style={styles.saathiBubble}>
           {message.content.split('\n').map((line, i) => (
             <span key={i}>
               {renderMarkdown(line)}
@@ -78,7 +78,7 @@ const styles = {
     lineHeight: 1.5,
     boxShadow: '0 2px 8px rgba(79,70,229,0.3)',
   },
-  ariaBubble: {
+  saathiBubble: {
     background: 'var(--bg-elevated)',
     border: '1px solid var(--border)',
     color: 'var(--text-1)',
@@ -96,7 +96,7 @@ const styles = {
     fontSize: 13,
     lineHeight: 1.5,
   },
-  ariaAvatar: {
+  saathiAvatar: {
     width: 30,
     height: 30,
     borderRadius: '50%',
@@ -111,14 +111,14 @@ const styles = {
     boxShadow: '0 0 0 2px rgba(79,70,229,0.3)',
     marginTop: 2,
   },
-  ariaDot: {
+  saathiDot: {
     width: 30, height: 30, borderRadius: '50%',
     background: 'rgba(244,63,94,0.15)',
     border: '1px solid rgba(244,63,94,0.3)',
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     fontSize: 14, fontWeight: 800, color: 'var(--rose)', flexShrink: 0,
   },
-  ariaLabel: {
+  saathiLabel: {
     fontSize: 10,
     color: 'var(--text-4)',
     marginBottom: 4,

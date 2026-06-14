@@ -1,15 +1,15 @@
 import { create } from 'zustand'
 import api from '../services/api'
 
-const ARIA_WELCOME = {
+const SAATHI_WELCOME = {
   id: 'welcome',
   role: 'assistant',
-  content: `Hi! I'm **Aria**, your Prism productivity coach. I have access to your focus data and I'm here to help you build better habits, overcome distractions, and hit your goals.\n\nWhat would you like to work on today?`,
+  content: `Hi! I'm **Saathi**, your Prism productivity coach. I have access to your focus data and I'm here to help you build better habits, overcome distractions, and hit your goals.\n\nWhat would you like to work on today?`,
   timestamp: new Date().toISOString(),
 }
 
 export const useCoachStore = create((set, get) => ({
-  messages:    [ARIA_WELCOME],
+  messages:    [SAATHI_WELCOME],
   suggestions: [],
   isTyping:    false,
   isLoading:   false,
@@ -52,24 +52,24 @@ export const useCoachStore = create((set, get) => ({
     try {
       const { data } = await api.post('/ai/chat', { message: content.trim(), history })
 
-      const ariaMsg = {
-        id:        Date.now().toString() + '-aria',
+      const saathiMsg = {
+        id:        Date.now().toString() + '-saathi',
         role:      'assistant',
         content:   data.data.reply,
         timestamp: new Date().toISOString(),
       }
 
-      set(s => ({ messages: [...s.messages, ariaMsg], isTyping: false }))
+      set(s => ({ messages: [...s.messages, saathiMsg], isTyping: false }))
     } catch (err) {
       const errMsg = {
         id:        Date.now().toString() + '-err',
         role:      'error',
-        content:   err.response?.data?.message || 'Aria is unavailable right now. Please check your GEMINI_API_KEY.',
+        content:   err.response?.data?.message || 'Saathi is unavailable right now. Please check your GEMINI_API_KEY.',
         timestamp: new Date().toISOString(),
       }
       set(s => ({ messages: [...s.messages, errMsg], isTyping: false, error: errMsg.content }))
     }
   },
 
-  clearChat: () => set({ messages: [ARIA_WELCOME], error: null }),
+  clearChat: () => set({ messages: [SAATHI_WELCOME], error: null }),
 }))

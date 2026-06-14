@@ -281,7 +281,7 @@ export default function Settings() {
           </Field>
           <div style={styles.modeDesc}>
             {frictionMode === 'auto'
-              ? '⬡ Auto — Aria adjusts friction levels based on your productivity patterns.'
+              ? '⬡ Auto — Saathi adjusts friction levels based on your productivity patterns.'
               : '◉ Manual — You control friction levels for each site directly.'}
           </div>
           <SaveBtn onClick={savePreferences} loading={prefSaving} saved={prefSaved} />

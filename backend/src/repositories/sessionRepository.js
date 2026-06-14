@@ -23,6 +23,14 @@ export const sessionRepository = {
   countByUser: (userId, query = {}) =>
     FocusSession.countDocuments({ user: userId, ...query }),
 
+  getAllTimeAvgScore: async (userId) => {
+    const res = await FocusSession.aggregate([
+      { $match: { user: userId, status: 'completed', productivityScore: { $ne: null } } },
+      { $group: { _id: null, avgScore: { $avg: '$productivityScore' } } }
+    ])
+    return res.length > 0 ? res[0].avgScore : 0
+  },
+
   update: (id, data) =>
     FocusSession.findByIdAndUpdate(id, data, { new: true, runValidators: true }),
 

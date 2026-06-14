@@ -5,7 +5,7 @@ import { useAuthStore } from '../../store/authStore'
 const NAV = [
   { to: '/dashboard',    label: 'Dashboard',    icon: '⬡' },
   { to: '/analytics',   label: 'Analytics',    icon: '◈' },
-  { to: '/coach',       label: 'Aria Coach',   icon: '◉' },
+  { to: '/coach',       label: 'Saathi Coach',   icon: '◉' },
   { to: '/sites',       label: 'Sites',        icon: '⊘' },
   { to: '/achievements',label: 'Achievements', icon: '◆' },
 ]

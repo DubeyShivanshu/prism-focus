@@ -12,9 +12,9 @@ if (env.GEMINI_API_KEY) {
     // gemini-2.5-flash requires SDK ≥0.7 (v1beta). Falls back to gemini-pro for old SDK.
     const modelName = env.GEMINI_MODEL || 'gemini-pro'
     model = genAI.getGenerativeModel({ model: modelName })
-    console.log(`[Aria] Using model: ${modelName}`)
+    console.log(`[Saathi] Using model: ${modelName}`)
   } catch (e) {
-    console.warn('[Aria] Gemini init failed:', e.message)
+    console.warn('[Saathi] Gemini init failed:', e.message)
   }
 }
 
@@ -28,7 +28,7 @@ const buildSystemPrompt = (user, analytics) => {
   const overrides    = analytics?.weekly?.overrides     || 0
   const topSite      = analytics?.topDistraction?.domain || 'none recorded'
 
-  return `You are Aria, the AI productivity coach inside Prism — a cognitive friction platform that helps users reduce digital distraction and build deep focus habits.
+  return `You are Saathi, the AI productivity coach inside Prism — a cognitive friction platform that helps users reduce digital distraction and build deep focus habits.
 
 Your personality: warm, direct, evidence-based, and concise. You never use filler phrases like "Great question!" or "Certainly!". You give specific, actionable advice.
 
@@ -79,7 +79,7 @@ export const aiService = {
     // Prepend system prompt as first user/model exchange if history is empty
     const fullHistory = geminiHistory.length === 0 ? [
       { role: 'user',  parts: [{ text: systemPrompt }] },
-      { role: 'model', parts: [{ text: 'Understood. I\'m ready to help as Aria, your Prism productivity coach.' }] },
+      { role: 'model', parts: [{ text: 'Understood. I\'m ready to help as Saathi, your Prism productivity coach.' }] },
     ] : [
       { role: 'user',  parts: [{ text: systemPrompt }] },
       { role: 'model', parts: [{ text: 'Understood.' }] },

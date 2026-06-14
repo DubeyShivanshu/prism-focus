@@ -16,7 +16,7 @@ import Dashboard from './pages/dashboard/Dashboard'
 // Analytics (Phase 8)
 import Analytics from './pages/analytics/Analytics'
 
-// Aria Coach (Phase 9)
+// Saathi Coach (Phase 9)
 import Coach from './pages/coach/Coach'
 
 import Sites from './pages/sites/Sites'

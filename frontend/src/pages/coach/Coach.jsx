@@ -48,15 +48,15 @@ function ContextPanel({ user }) {
 
   return (
     <div style={styles.contextPanel}>
-      {/* Aria avatar */}
+      {/* Saathi avatar */}
       <div style={styles.avatarSection}>
         <div style={styles.avatarRing}>
-          <div style={styles.avatar}>A</div>
+          <div style={styles.avatar}>S</div>
           <div style={styles.avatarOnline} />
         </div>
-        <div style={styles.ariaName}>Aria</div>
-        <div style={styles.ariaRole}>AI Productivity Coach</div>
-        <div style={styles.ariaBadge}>● Online</div>
+        <div style={styles.saathiName}>Saathi</div>
+        <div style={styles.saathiRole}>AI Productivity Coach</div>
+        <div style={styles.saathiBadge}>● Online</div>
       </div>
 
       {/* Divider */}
@@ -92,9 +92,9 @@ function ContextPanel({ user }) {
       <div style={{ borderTop:'1px solid var(--border)', margin:'16px 0' }} />
 
       {/* About */}
-      <div style={styles.contextTitle}>About Aria</div>
+      <div style={styles.contextTitle}>About Saathi</div>
       <p style={styles.aboutText}>
-        Aria analyses your Prism data in real-time to give personalised coaching. She knows your streak, score, and which sites distract you most.
+        Saathi analyses your Prism data in real-time to give personalised coaching. She knows your streak, score, and which sites distract you most.
       </p>
 
       <div style={styles.modelTag}>Powered by Gemini 2.5 Flash</div>
@@ -150,7 +150,7 @@ export default function Coach() {
         <div style={styles.chatPanel}>
           {/* Chat header */}
           <div style={styles.chatHeader}>
-            <div style={styles.chatTitle}>Chat with Aria</div>
+            <div style={styles.chatTitle}>Chat with Saathi</div>
             <button
               onClick={clearChat}
               style={styles.clearBtn}
@@ -191,7 +191,7 @@ export default function Coach() {
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={handleKey}
-              placeholder="Ask Aria anything about your focus, habits, or productivity…"
+              placeholder="Ask Saathi anything about your focus, habits, or productivity…"
               rows={1}
               style={styles.textarea}
               disabled={isTyping}
@@ -258,9 +258,9 @@ const styles = {
     background:'var(--emerald)',
     border:'2px solid var(--bg-card)',
   },
-  ariaName: { fontSize:16, fontWeight:800, color:'var(--text-1)' },
-  ariaRole: { fontSize:11, color:'var(--text-3)', textAlign:'center' },
-  ariaBadge: {
+  saathiName: { fontSize:16, fontWeight:800, color:'var(--text-1)' },
+  saathiRole: { fontSize:11, color:'var(--text-3)', textAlign:'center' },
+  saathiBadge: {
     fontSize:10, color:'var(--emerald)', fontWeight:600,
     background:'rgba(16,185,129,0.1)', border:'1px solid rgba(16,185,129,0.2)',
     padding:'2px 8px', borderRadius:99,

@@ -19,6 +19,7 @@ Prism reduces digital distraction using behavioral psychology and AI — not by 
 
 ### 📊 Dashboard
 - Live productivity score, streak, and focus time widgets
+- **New:** Extension Sync Card for easy 1-click token copying
 - 84-day activity heatmap (GitHub-style)
 - Recent sessions list
 - Integrated Pomodoro / Deep Work timer widget
@@ -26,11 +27,12 @@ Prism reduces digital distraction using behavioral psychology and AI — not by 
 ### ⏱ Focus Timer (Pomodoro)
 - SVG circular countdown with glow ring animation
 - Session states: `idle → running → paused → break → completed`
+- **New:** Auto-completion with Web Audio API beep alerts and browser push notifications
 - Notes modal on session completion
 - Today's focus stats + sessions log sidebar
 - Synced to backend (`POST /api/sessions`)
 
-### 🔮 Aria — AI Productivity Coach
+### 🔮 Saathi — AI Productivity Coach
 - Powered by **Gemini 2.5 Flash**
 - Context-aware suggestions based on your real session/block data
 - Streaming chat with formatted markdown responses
@@ -98,9 +100,9 @@ Prism/
 │       ├── hooks/              # useAuth, useTimer
 │       ├── pages/
 │       │   ├── auth/           # Login, Register, AuthCallback (OAuth)
-│       │   ├── dashboard/      # Dashboard with heatmap + timer widget
-│       │   ├── analytics/      # Charts, heatmap, session log
-│       │   ├── coach/          # Aria AI chat interface
+│       │   ├── dashboard/      # Dashboard with heatmap, timer widget, and Token Sync
+│       │   ├── analytics/      # Charts, heatmap, session log, and auto-calculating Productivity Score
+│       │   ├── coach/          # Saathi AI chat interface
 │       │   ├── sites/          # Blocked sites manager
 │       │   ├── achievements/   # Gamified achievement cards
 │       │   ├── pomodoro/       # Full-page focus timer
@@ -219,7 +221,7 @@ npm run dev
 The extension auto-receives the JWT token from the dashboard after login (via `extensionBridge.js`). If it doesn't connect automatically:
 
 1. Click the Prism extension icon in Chrome toolbar
-2. Paste your JWT token (get it from DevTools Console: `window.__prism_access_token__`)
+2. Paste your JWT token (you can copy this directly from the **Extension Sync** card on the right side of your Dashboard)
 3. Click **Connect** → **Sync Now**
 
 ### Testing Friction
@@ -256,7 +258,7 @@ The extension auto-receives the JWT token from the dashboard after login (via `e
 | DELETE | `/api/blocks/:id` | ✅ | Remove a site |
 | GET | `/api/settings` | ✅ | Get user settings |
 | PATCH | `/api/settings` | ✅ | Update settings |
-| POST | `/api/ai/chat` | ✅ | Chat with Aria AI coach |
+| POST | `/api/ai/chat` | ✅ | Chat with Saathi AI coach |
 | GET | `/api/ai/suggestions` | ✅ | Get AI productivity suggestions |
 | GET | `/api/health` | ❌ | Server health check |
 

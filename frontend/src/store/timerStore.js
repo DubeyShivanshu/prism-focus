@@ -51,6 +51,10 @@ export const useTimerStore = create((set, get) => ({
 
   // Start session
   start: async () => {
+    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission()
+    }
+
     const { sessionType, getConfig, phase } = get()
     if (phase === 'running') return
     const cfg = getConfig()
@@ -104,6 +108,37 @@ export const useTimerStore = create((set, get) => ({
   },
 
   _autoComplete: async () => {
+    // 1. Play a beep sound
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)()
+      
+      const playBeep = (time) => {
+        const osc = ctx.createOscillator()
+        const gain = ctx.createGain()
+        osc.connect(gain)
+        gain.connect(ctx.destination)
+        osc.type = 'sine'
+        osc.frequency.setValueAtTime(880, time) // A5 note
+        gain.gain.setValueAtTime(0.1, time)
+        osc.start(time)
+        osc.stop(time + 0.4)
+      }
+      
+      playBeep(ctx.currentTime)
+      playBeep(ctx.currentTime + 0.6)
+      playBeep(ctx.currentTime + 1.2)
+    } catch (e) {
+      console.error('Audio playback failed', e)
+    }
+
+    // 2. Show browser notification
+    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
+      new Notification('Prism Focus', {
+        body: 'Your focus session has ended! Great job.',
+        icon: '/assets/icons/icon128.png'
+      })
+    }
+
     await get().complete()
   },
 

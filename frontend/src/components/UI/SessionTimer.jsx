@@ -53,14 +53,65 @@ export default function SessionTimer() {
   useEffect(() => {
     if (!activeSession) { setElapsed(0); return }
     const start = new Date(activeSession.startTime).getTime()
-    const tick  = () => setElapsed(Math.floor((Date.now() - start) / 1000))
+    const planned = activeSession.plannedDuration * 60
+    let isCompleted = false
+
+    const tick  = async () => {
+      if (isCompleted) return
+      
+      const e = Math.floor((Date.now() - start) / 1000)
+      setElapsed(e)
+
+      if (e >= planned && !isCompleted) {
+        isCompleted = true
+        clearInterval(intervalRef.current)
+
+        // Play Beep
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)()
+          const playBeep = (time) => {
+            const osc = ctx.createOscillator()
+            const gain = ctx.createGain()
+            osc.connect(gain)
+            gain.connect(ctx.destination)
+            osc.type = 'sine'
+            osc.frequency.setValueAtTime(880, time)
+            gain.gain.setValueAtTime(0.1, time)
+            osc.start(time)
+            osc.stop(time + 0.4)
+          }
+          playBeep(ctx.currentTime)
+          playBeep(ctx.currentTime + 0.6)
+          playBeep(ctx.currentTime + 1.2)
+        } catch (err) {
+          console.error('Audio playback failed', err)
+        }
+
+        // Show Notification
+        if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'granted') {
+          new Notification('Prism Focus', {
+            body: 'Your focus session has ended! Great job.',
+            icon: '/assets/icons/icon128.png'
+          })
+        }
+
+        // Auto-complete the session
+        await completeSession(activeSession._id)
+      }
+    }
     tick()
     intervalRef.current = setInterval(tick, 1000)
     return () => clearInterval(intervalRef.current)
-  }, [activeSession])
+  }, [activeSession, completeSession])
 
   const handleStart = async () => {
     setStartError('')
+    
+    // Request notification permission
+    if (typeof window !== 'undefined' && 'Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission()
+    }
+
     const type = SESSION_TYPES.find(t => t.value === selectedType)
     const mins = selectedType === 'custom' ? customMins : type.duration
     try {

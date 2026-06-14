@@ -16,7 +16,7 @@ const CustomTooltip = ({ active, payload, label }) => {
       fontSize: 12,
     }}>
       <div style={{ color: 'var(--text-3)', marginBottom: 4 }}>
-        {label ? format(parseISO(label), 'MMM d, yyyy') : ''}
+        {payload[0]?.payload?.date ? format(parseISO(payload[0].payload.date), 'MMM d, yyyy') : label}
       </div>
       <div style={{ color: 'var(--indigo)', fontWeight: 700, fontSize: 14 }}>
         Score: {Math.round(payload[0]?.value ?? 0)}

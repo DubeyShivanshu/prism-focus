@@ -5,7 +5,7 @@ import { useSessionStore } from '../../store/sessionStore'
 const PAGE_TITLES = {
   '/dashboard':    'Dashboard',
   '/analytics':    'Analytics',
-  '/coach':        'Aria Coach',
+  '/coach':        'Saathi Coach',
   '/sites':        'Blocked Sites',
   '/achievements': 'Achievements',
   '/settings':     'Settings',

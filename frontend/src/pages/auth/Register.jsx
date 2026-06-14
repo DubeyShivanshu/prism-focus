@@ -129,63 +129,27 @@ export default function Register() {
 
   return (
     <div style={styles.page}>
-      {/* ── Left Brand Panel ── */}
-      <div style={styles.brand}>
-        <div style={styles.brandContent}>
-          <div style={{ ...styles.orb, top:'5%',    left:'15%',  background:'rgba(124,58,237,0.2)' }}/>
-          <div style={{ ...styles.orb, bottom:'10%',right:'5%',  background:'rgba(6,182,212,0.15)', width:280, height:280 }}/>
+      {/* Background glow resembling the image */}
+      <div style={{ ...styles.orb, top: '-20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255, 255, 255, 0.08)', width: 600, height: 600, borderRadius: '50%', filter: 'blur(120px)' }}/>
 
-          <div style={{ position:'relative', zIndex:1 }}>
-            <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:48 }}>
-              <PrismLogo size={40} />
-              <span style={{ fontSize:22, fontWeight:700, letterSpacing:'-0.02em' }}>Prism</span>
-            </div>
-
-            <h1 style={styles.headline}>
-              Your focus,<br/>
-              <span style={styles.headlineGrad}>refracted.</span>
-            </h1>
-            <p style={styles.sub}>
-              Join thousands of people who stopped fighting distraction and started
-              making it unrewarding with Prism's Cognitive Friction engine.
-            </p>
-
-            {/* Social proof */}
-            <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
-              {[
-                { stat:'2.4h', label:'average daily focus time gained' },
-                { stat:'73%',  label:'reduction in override attempts after 30 days' },
-                { stat:'4.8★', label:'average user satisfaction score' },
-              ].map(({ stat, label }) => (
-                <div key={stat} style={{ display:'flex', alignItems:'center', gap:16,
-                  padding:'12px 16px', borderRadius:10,
-                  background:'rgba(255,255,255,0.04)',
-                  border:'1px solid rgba(255,255,255,0.08)' }}>
-                  <span style={{ fontSize:22, fontWeight:800,
-                    background:'linear-gradient(90deg, #4F46E5, #7C3AED)',
-                    WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent' }}>
-                    {stat}
-                  </span>
-                  <span style={{ fontSize:13, color:'rgba(255,255,255,0.45)' }}>{label}</span>
-                </div>
-              ))}
-            </div>
+      <div style={styles.container}>
+        {/* Header */}
+        <div style={styles.header}>
+          <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:10, marginBottom:24 }}>
+            <PrismLogo size={36} />
+            <span style={{ fontSize:24, fontWeight:700, color:'#fff' }}>Prism</span>
           </div>
+          <h1 style={styles.headline}>
+            Your focus,<br/>
+            <span style={styles.headlineGrad}>refracted.</span>
+          </h1>
         </div>
-      </div>
 
-      {/* ── Right Form Panel ── */}
-      <div style={styles.formPanel}>
+        {/* Form Panel */}
         <div style={styles.formCard} className="animate-fade-in-up">
-          {/* Mobile logo */}
-          <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:24, justifyContent:'center' }} className="mobile-logo">
-            <PrismLogo size={30} />
-            <span style={{ fontSize:17, fontWeight:700 }}>Prism</span>
-          </div>
-
           <StepDots current={step} />
 
-          <h2 style={{ fontSize:22, fontWeight:700, letterSpacing:'-0.02em', marginBottom:4 }}>
+          <h2 style={{ fontSize:22, fontWeight:700, letterSpacing:'-0.02em', marginBottom:4, color:'#fff' }}>
             {step === 0 ? 'Create your account' : 'Secure your account'}
           </h2>
           <p style={{ fontSize:14, color:'var(--text-2)', marginBottom:24 }}>
@@ -206,7 +170,7 @@ export default function Register() {
             {step === 0 && (
               <div style={{ display:'flex', flexDirection:'column', gap:16 }} className="stagger">
                 <div className="form-group animate-fade-in-up">
-                  <label className="form-label" htmlFor="name">Full name</label>
+                  <label className="form-label" htmlFor="name" style={{ color: 'var(--text-2)' }}>Full name</label>
                   <input
                     id="name" name="name" type="text"
                     className={`form-input ${errors.name ? 'error' : ''}`}
@@ -215,12 +179,13 @@ export default function Register() {
                     onChange={handleChange}
                     autoComplete="name"
                     autoFocus
+                    style={{ background: '#111', borderColor: 'rgba(255,255,255,0.05)', color: '#fff' }}
                   />
                   {errors.name && <span className="form-error">{errors.name}</span>}
                 </div>
 
                 <div className="form-group animate-fade-in-up">
-                  <label className="form-label" htmlFor="reg-email">Email address</label>
+                  <label className="form-label" htmlFor="reg-email" style={{ color: 'var(--text-2)' }}>Email address</label>
                   <input
                     id="reg-email" name="email" type="email"
                     className={`form-input ${errors.email ? 'error' : ''}`}
@@ -228,6 +193,7 @@ export default function Register() {
                     value={form.email}
                     onChange={handleChange}
                     autoComplete="email"
+                    style={{ background: '#111', borderColor: 'rgba(255,255,255,0.05)', color: '#fff' }}
                   />
                   {errors.email && <span className="form-error">{errors.email}</span>}
                 </div>
@@ -235,8 +201,8 @@ export default function Register() {
                 <button
                   id="register-next"
                   type="button"
-                  className="btn btn-primary btn-lg w-full"
-                  style={{ marginTop:4 }}
+                  className="btn btn-primary w-full"
+                  style={{ marginTop:12, background: 'linear-gradient(90deg, #6b46c1, #8b5cf6)', border: 'none', height: 48, borderRadius: 12, fontWeight: 600, color: '#fff' }}
                   onClick={handleNext}
                 >
                   Continue →
@@ -248,7 +214,7 @@ export default function Register() {
             {step === 1 && (
               <div style={{ display:'flex', flexDirection:'column', gap:16 }} className="stagger">
                 <div className="form-group animate-fade-in-up">
-                  <label className="form-label" htmlFor="password">Password</label>
+                  <label className="form-label" htmlFor="password" style={{ color: 'var(--text-2)' }}>Password</label>
                   <input
                     id="password" name="password" type="password"
                     className={`form-input ${errors.password ? 'error' : ''}`}
@@ -257,13 +223,14 @@ export default function Register() {
                     onChange={handleChange}
                     autoComplete="new-password"
                     autoFocus
+                    style={{ background: '#111', borderColor: 'rgba(255,255,255,0.05)', color: '#fff' }}
                   />
                   {errors.password && <span className="form-error">{errors.password}</span>}
                   <PasswordStrength password={form.password} />
                 </div>
 
                 <div className="form-group animate-fade-in-up">
-                  <label className="form-label" htmlFor="confirm">Confirm password</label>
+                  <label className="form-label" htmlFor="confirm" style={{ color: 'var(--text-2)' }}>Confirm password</label>
                   <input
                     id="confirm" name="confirm" type="password"
                     className={`form-input ${errors.confirm ? 'error' : ''}`}
@@ -271,15 +238,16 @@ export default function Register() {
                     value={form.confirm}
                     onChange={handleChange}
                     autoComplete="new-password"
+                    style={{ background: '#111', borderColor: 'rgba(255,255,255,0.05)', color: '#fff' }}
                   />
                   {errors.confirm && <span className="form-error">{errors.confirm}</span>}
                 </div>
 
-                <div style={{ display:'flex', gap:10, marginTop:4 }}>
+                <div style={{ display:'flex', gap:10, marginTop:12 }}>
                   <button
                     type="button"
                     className="btn btn-ghost"
-                    style={{ flex:'0 0 auto' }}
+                    style={{ flex:'0 0 auto', color: '#fff', height: 48, borderRadius: 12 }}
                     onClick={() => setStep(0)}
                   >
                     ← Back
@@ -287,8 +255,8 @@ export default function Register() {
                   <button
                     id="register-submit"
                     type="submit"
-                    className="btn btn-primary btn-lg"
-                    style={{ flex:1 }}
+                    className="btn btn-primary"
+                    style={{ flex:1, background: 'linear-gradient(90deg, #6b46c1, #8b5cf6)', border: 'none', height: 48, borderRadius: 12, fontWeight: 600, color: '#fff' }}
                     disabled={loading}
                   >
                     {loading ? <><div className="spinner" />Creating account…</> : 'Create Account'}
@@ -299,14 +267,14 @@ export default function Register() {
           </form>
 
           {/* Divider */}
-          <div className="divider" style={{ margin:'24px 0' }}>or</div>
+          <div className="divider" style={{ margin:'24px 0', color: 'rgba(255,255,255,0.2)' }}>OR</div>
 
           {/* Google OAuth */}
           <button
             id="google-register"
             type="button"
             className="btn btn-google w-full"
-            style={{ height:46 }}
+            style={{ height:48, background: '#111', border: '1px solid rgba(255,255,255,0.05)', color: '#fff', borderRadius: 12, fontWeight: 500 }}
             onClick={() => window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`}
           >
             <svg width="18" height="18" viewBox="0 0 18 18">
@@ -321,7 +289,7 @@ export default function Register() {
           {/* Footer */}
           <p style={{ textAlign:'center', marginTop:24, fontSize:14, color:'var(--text-2)' }}>
             Already have an account?{' '}
-            <Link to="/login" style={{ color:'var(--indigo)', fontWeight:600 }}>
+            <Link to="/login" style={{ color:'#8b5cf6', fontWeight:600 }}>
               Sign in
             </Link>
           </p>
@@ -336,30 +304,29 @@ const styles = {
   page: {
     minHeight: '100vh',
     display: 'flex',
-    background: 'var(--bg-base)',
-  },
-  brand: {
-    flex: '0 0 42%',
-    background: 'linear-gradient(135deg, #0a0a1a 0%, #0f0a2e 60%, #0a0a1f 100%)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: '#050505',
     position: 'relative',
     overflow: 'hidden',
-    display: 'none',
-  },
-  brandContent: {
-    position: 'relative',
-    zIndex: 1,
-    padding: '60px 48px',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    padding: '40px 20px',
   },
   orb: {
     position: 'absolute',
-    width: 320, height: 320,
-    borderRadius: '50%',
-    filter: 'blur(80px)',
     pointerEvents: 'none',
+  },
+  container: {
+    position: 'relative',
+    zIndex: 1,
+    width: '100%',
+    maxWidth: 440,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: 40,
   },
   headline: {
     fontSize: 40,
@@ -367,50 +334,19 @@ const styles = {
     letterSpacing: '-0.03em',
     lineHeight: 1.15,
     color: '#fff',
-    marginBottom: 16,
   },
   headlineGrad: {
-    background: 'linear-gradient(90deg, #7C3AED, #06B6D4)',
+    background: 'linear-gradient(90deg, #6b46c1, #06b6d4)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
     backgroundClip: 'text',
   },
-  sub: {
-    fontSize: 15,
-    color: 'rgba(255,255,255,0.45)',
-    lineHeight: 1.7,
-    marginBottom: 36,
-    maxWidth: 380,
-  },
-  formPanel: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '40px 24px',
-  },
   formCard: {
     width: '100%',
-    maxWidth: 440,
-    background: 'var(--bg-card)',
-    border: '1px solid var(--border)',
+    background: '#151518',
+    border: '1px solid rgba(255,255,255,0.05)',
     borderRadius: 20,
     padding: '40px',
-    boxShadow: '0 8px 40px rgba(0,0,0,0.5)',
+    boxShadow: '0 20px 40px rgba(0,0,0,0.8)',
   },
-}
-
-// Responsive brand panel
-if (typeof document !== 'undefined') {
-  const style = document.createElement('style')
-  style.textContent = `
-    @media (min-width: 900px) {
-      [style*="flex: 0 0 42%"] { display: block !important; }
-      .mobile-logo { display: none !important; }
-    }
-  `
-  if (!document.head.querySelector('[data-prism-responsive]')) {
-    style.setAttribute('data-prism-responsive', '1')
-    document.head.appendChild(style)
-  }
 }

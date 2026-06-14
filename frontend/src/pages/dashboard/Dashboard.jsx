@@ -40,6 +40,66 @@ function TopDistractionCard({ site }) {
   )
 }
 
+// Extension Token Box
+function TokenBox() {
+  const [copied, setCopied] = useState(false)
+  const token = window.__prism_access_token__ || 'Token not available. Try refreshing.'
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(token)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <div style={cardStyle}>
+      <div style={cardHeader}>
+        <span style={cardTitle}>Extension Sync</span>
+      </div>
+      <div style={{ padding:'16px 20px' }}>
+        <p style={{ fontSize:12, color:'var(--text-3)', marginBottom:12, lineHeight:1.5 }}>
+          Paste this token into your Prism browser extension to link it to your account.
+        </p>
+        <div style={{ display:'flex', gap:8 }}>
+          <input 
+            type="text" 
+            value={token} 
+            readOnly 
+            style={{ 
+              flex:1, 
+              background:'var(--bg-base)', 
+              border:'1px solid var(--border)', 
+              borderRadius:8, 
+              padding:'8px 12px', 
+              fontSize:12, 
+              color:'var(--text-2)',
+              outline:'none',
+              fontFamily: 'monospace'
+            }} 
+          />
+          <button 
+            onClick={handleCopy}
+            style={{
+              background: copied ? 'var(--emerald)' : 'var(--bg-surface)',
+              border: copied ? '1px solid var(--emerald)' : '1px solid var(--border)',
+              color: copied ? '#fff' : 'var(--text-1)',
+              borderRadius: 8,
+              padding: '0 12px',
+              fontSize: 12,
+              fontWeight: 600,
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            {copied ? 'Copied!' : 'Copy'}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // Streak Card
 function StreakCard({ streak }) {
   const cur  = streak?.current || 0
@@ -200,6 +260,9 @@ export default function Dashboard() {
 
           {/* Heatmap */}
           <MiniHeatmap data={heatmap} />
+
+          {/* Extension Sync Token */}
+          <TokenBox />
 
           {/* Top distraction */}
           <TopDistractionCard site={summary?.topDistraction} />

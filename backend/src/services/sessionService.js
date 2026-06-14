@@ -35,16 +35,27 @@ export const sessionService = {
     const endTime = new Date()
     const actualDuration = Math.round((endTime - session.startTime) / 60000)
 
+    // Calculate a default productivity score if one wasn't provided
+    let finalScore = productivityScore
+    if (finalScore === undefined || finalScore === null) {
+      const penalty = (session.overrides?.length || 0) * 15
+      finalScore = Math.max(0, 100 - penalty)
+    }
+
     const updated = await sessionRepository.update(sessionId, {
       status: 'completed',
       endTime,
       actualDuration,
-      ...(productivityScore !== undefined && { productivityScore }),
+      productivityScore: finalScore,
       ...(notes && { notes }),
     })
 
     // Update user's total focus time
     await userRepository.incrementFocusTime(userId, actualDuration)
+
+    // Update user's global productivity score
+    const avgScore = await sessionRepository.getAllTimeAvgScore(userId)
+    await userRepository.updateProductivityScore(userId, Math.round(avgScore))
 
     return updated
   },
