@@ -22,8 +22,12 @@ export const useAuthStore = create((set, get) => ({
       get()._setToken(data.data.accessToken)
       set({ user: data.data.user, isAuthenticated: true })
     } catch {
-      get()._setToken(null)
-      set({ user: null, isAuthenticated: false })
+      // Only clear auth state if we haven't already successfully logged in
+      // (prevents background refresh from erasing a brand new OAuth login)
+      if (!get().accessToken) {
+        get()._setToken(null)
+        set({ user: null, isAuthenticated: false })
+      }
     } finally {
       set({ isLoading: false })
     }
