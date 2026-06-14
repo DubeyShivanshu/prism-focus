@@ -287,4 +287,4 @@ For production, set `NODE_ENV=production` and update:
 
 ## License
 
-MIT
+[MIT](./LICENSE)
