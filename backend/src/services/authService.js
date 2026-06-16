@@ -14,6 +14,12 @@ const signRefreshToken = (userId) =>
     expiresIn: env.JWT_REFRESH_EXPIRES,
   })
 
+// Long-lived token for Chrome extension (30 days)
+const signExtensionToken = (userId) =>
+  jwt.sign({ id: userId, ext: true }, env.JWT_ACCESS_SECRET, {
+    expiresIn: '30d',
+  })
+
 // Cookie Config
 export const REFRESH_TOKEN_COOKIE = 'prism_refresh'
 
@@ -136,5 +142,13 @@ export const authService = {
     const user = await userRepository.findByIdPublic(userId)
     if (!user) throw new ApiError(404, 'User not found')
     return user
+  },
+
+  // Generate a long-lived extension token (30 days)
+  async generateExtensionToken(userId) {
+    const user = await userRepository.findById(userId)
+    if (!user) throw new ApiError(404, 'User not found')
+    const token = signExtensionToken(userId)
+    return { token, user }
   },
 }

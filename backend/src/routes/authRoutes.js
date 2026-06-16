@@ -7,6 +7,7 @@ import {
   logout,
   getMe,
   googleCallback,
+  getExtensionToken,
 } from '../controllers/authController.js'
 import { protect } from '../middleware/authMiddleware.js'
 import { authLimiter } from '../middleware/rateLimiter.js'
@@ -21,6 +22,7 @@ router.post('/refresh',  refresh)
 // Protected Routes 
 router.post('/logout', protect, logout)
 router.get('/me',      protect, getMe)
+router.post('/extension-token', protect, getExtensionToken)
 
 // Google OAuth
 // Initiates Google OAuth flow — redirects to Google's consent screen

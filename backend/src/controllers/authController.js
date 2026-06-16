@@ -65,3 +65,10 @@ export const googleCallback = asyncHandler(async (req, res) => {
   const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173'
   res.redirect(`${clientUrl}/auth/callback?token=${accessToken}`)
 })
+
+// POST /api/auth/extension-token
+// Issues a long-lived (30-day) token for the Chrome extension
+export const getExtensionToken = asyncHandler(async (req, res) => {
+  const { token } = await authService.generateExtensionToken(req.user._id)
+  successResponse(res, 200, 'Extension token generated', { token })
+})
