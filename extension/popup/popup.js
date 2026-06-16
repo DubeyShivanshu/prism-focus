@@ -1,7 +1,7 @@
 // Prism Popup Script
 'use strict'
 
-const DASHBOARD_URL = 'http://localhost:5173'
+const DASHBOARD_URL = 'https://prism-focus-dun.vercel.app/dashboard'
 
 // Helpers
 const $  = (id) => document.getElementById(id)

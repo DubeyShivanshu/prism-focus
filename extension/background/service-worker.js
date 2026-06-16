@@ -4,7 +4,7 @@
 //  2. Store rules & auth token in chrome.storage.local
 //  3. Respond to messages from content script and popup
 
-const API_BASE = 'http://localhost:5000/api'
+const API_BASE = 'https://prism-focus.onrender.com/api'
 const SYNC_ALARM = 'prism-sync'
 const SYNC_INTERVAL_MINUTES = 5
 

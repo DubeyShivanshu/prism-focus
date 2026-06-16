@@ -30,8 +30,8 @@
       "css": ["styles/distortion.css"],
       "run_at": "document_start",
       "exclude_matches": [
-        "http://localhost:5000/*",
-        "http://localhost:5173/*",
+        "https://prism-focus.onrender.com/*",
+        "https://prism-focus-dun.vercel.app/*",
         "https://accounts.google.com/*",
         "https://*.google.com/o/oauth2/*",
         "https://oauth2.googleapis.com/*",

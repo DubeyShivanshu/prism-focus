@@ -17,7 +17,16 @@ app.use(helmet())
 
 app.use(
   cors({
-    origin: env.CLIENT_URL,
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      // Allow requests from the defined CLIENT_URL
+      // Allow requests from any chrome-extension
+      if (!origin || origin === env.CLIENT_URL || origin.startsWith('chrome-extension://')) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
